@@ -8,6 +8,8 @@ import Login from './components/pages/Login';
 import ProfilePage from './components/pages/ProfilePage';
 import ForgotPassword from './components/pages/ForgotPassword';
 import ResetPassword from './components/pages/ResetPassword';
+import AddRecipe from './components/pages/AddRecipe';
+import RecipesPage from './components/pages/RecipesPage';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path='/profile' exact element={<ProfilePage/>} />
         <Route path='/forgot-password' exact element={<ForgotPassword/>} />
         <Route path="/reset-password/:token" element={<ResetPassword/>} />
+        <Route path="/add-recipe" element={<AddRecipe/>} />
+        <Route path="/recipes" element={<RecipesPage/>} />
         </Routes>
       </Router>
     </>

@@ -20,8 +20,7 @@ function LoginForm() {
                 console.log(res.data);
                 if (res.data.token) {
                     localStorage.setItem('token', res.data.token);
-                    navigate('/');
-                    window.location.reload(); 
+                    
                 } else {
                     setMessage(res.data.message || "Login failed");
                 }

@@ -1,55 +1,50 @@
 .footer-container {
-    position: relative;
-    background-color: #00236D;
-    color: #fff;
-    text-align: center;
-    overflow: hidden;
-  }
-  
-  .footer-wave {
-    position: absolute;
-    top: -1px;
-    left: 0;
-    width: 100%;
-    height: auto;
-    z-index: -1;
-  }
-  
-  .wave-svg {
-    display: block;
-    width: 100%;
-    height: 100px; 
-    transform: translateY(100%); 
-  }
-  
-  
+  position: relative;
+  background-color: transparent; /* Matches the black bar in the image */
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.wave-svg {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  position: absolute; /* Absolute positioning to overlay above the SVG */
+  top: 50%; /* Centers vertically */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centers both horizontally and vertically */
+  z-index: 1; /* Ensures the icons are above the SVG */
+  padding: 1rem 0;
+}
+
+.footer-icon {
+  color: #fff;
+  font-size: 2rem;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-icon:hover {
+  color: #1f98f4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .footer-icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem; 
-    padding: 2rem 0;
-    background-color: #00236D;
+    gap: 0.7rem;
   }
-  
+
   .footer-icon {
-    color: #fff;
-    font-size: 2rem;
-    transition: color 0.3s ease;
-    text-decoration: none;
+    font-size: 1rem;
+
   }
-  
-  .footer-icon:hover {
-    color: #1f98f4;
-  }
-  
-  @media (max-width: 768px) {
-    .footer-icons {
-      gap: 1.5rem;
-    }
-  
-    .footer-icon {
-      font-size: 1.5rem;
-    }
-  }
-  
+}
