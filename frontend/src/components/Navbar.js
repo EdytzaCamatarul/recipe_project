@@ -55,7 +55,7 @@ function Navbar() {
     const handleLogout = () => {
         localStorage.removeItem('token'); // Clear token
         setIsLoggedIn(false);
-        navigate('/'); 
+        navigate('/');
         window.location.reload();
     };
 
@@ -78,26 +78,26 @@ function Navbar() {
                         </li>
 
                         <li className='nav-item'>
-                            <Link to='/recipes' className='nav-links' onClick={closeMobileMenu}>
+                            <Link to='/add-recipe' className='nav-links' onClick={closeMobileMenu}>
                                 Add Recipe
                             </Link>
                         </li>
 
                         {isLoggedIn ? (
                             location.pathname === '/profile' ? (
-                            <li className='nav-item'>
-                                <Link to='/' className='nav-links-mobile' onClick={() => {
-                                    handleLogout();
-                                    closeMobileMenu();
-                                }}>
-                                    Logout
-                                </Link>
-                            </li>) : (
                                 <li className='nav-item'>
-                                <Link to='/profile' className='nav-links-mobile' onClick={closeMobileMenu}>
-                                    Profile
-                                </Link>
-                            </li>
+                                    <Link to='/' className='nav-links-mobile' onClick={() => {
+                                        handleLogout();
+                                        closeMobileMenu();
+                                    }}>
+                                        Logout
+                                    </Link>
+                                </li>) : (
+                                <li className='nav-item'>
+                                    <Link to='/profile' className='nav-links-mobile' onClick={closeMobileMenu}>
+                                        Profile
+                                    </Link>
+                                </li>
                             )
                         ) : (
                             <>
@@ -117,13 +117,13 @@ function Navbar() {
 
                     {!isLoggedIn && button && (
                         <div>
-                        <Button buttonStyle='btn--outline' link='/login'>
-                            Login
-                        </Button>
-                        
-                        <Button buttonStyle='btn--medium' link='/register'>
-                            Register
-                        </Button>
+                            <Button buttonStyle='btn--outline' link='/login'>
+                                Login
+                            </Button>
+
+                            <Button buttonStyle='btn--medium' link='/register'>
+                                Register
+                            </Button>
                         </div>)}
                     {isLoggedIn && location.pathname === '/profile' && button && (
                         <Button buttonStyle='btn--outline' link='/' onClick={() => {
@@ -131,7 +131,7 @@ function Navbar() {
                             closeMobileMenu();
                         }}>
                             Logout
-                    </Button>
+                        </Button>
                     )}
                     {isLoggedIn && button && location.pathname != '/profile' && (
                         <Button buttonStyle='btn--outline' link='/profile'>

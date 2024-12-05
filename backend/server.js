@@ -8,12 +8,24 @@ app.use(express.json());
 app.use(cors());
 
 const SECRET_KEY = "cheie"; 
+
+
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
     database: "users"
 });
+
+const recipeDb = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "recipes"
+});
+
+
+
 
 app.post('/users', (req, res) => {
     const sql = "SELECT * FROM users WHERE email = ? AND password = ?";
@@ -23,7 +35,7 @@ app.post('/users', (req, res) => {
         }
         if (data.length > 0) {
             // Generate JWT
-            const token = jwt.sign({ email: req.body.email }, SECRET_KEY, { expiresIn: '7d' });
+            const token = jwt.sign({ email: req.body.email , name: data[0].name}, SECRET_KEY, { expiresIn: '7d' });
             return res.json({ message: "Login successful", token });
         }
         return res.status(401).json({ message: "Invalid email or password" });
@@ -70,6 +82,10 @@ app.get("/users", authenticateToken, (req, res) => {
 const crypto = require('crypto');
 
 const nodemailer = require('nodemailer');
+
+const multer = require('multer');
+const path = require('path');
+
 
 require('dotenv').config();
 
@@ -124,7 +140,7 @@ app.post('/reset-password', (req, res) => {
     
     const { resetToken, newPassword } = req.body;
     const sql = "SELECT email FROM users WHERE reset_token = ? AND token_expiry > ?";
-db.query(sql, [resetToken, Date.now()], (err, result) => {
+    db.query(sql, [resetToken, Date.now()], (err, result) => {
     if (err || result.length === 0) {
         return res.status(400).json({ error: "Invalid or expired token" });
     }
@@ -139,6 +155,70 @@ db.query(sql, [resetToken, Date.now()], (err, result) => {
         });
     });
 });
+
+
+// multer pentru poze
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '../frontend/public/uploads'); 
+    },
+    filename: (req, file, cb) => {
+        
+        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+    }
+});
+
+
+const upload = multer({ storage: storage });
+
+
+app.post('/recipes', authenticateToken, upload.single('image'), (req, res) => {
+    const photo = req.file.filename;
+    const name = req.body.name;
+    const description = req.body.description;
+    const author = req.user.name;
+    const sql = "INSERT INTO recipes (name, description, photo, author) VALUES (?, ?, ?, ?)";
+
+    recipeDb.query(sql, [name, description, photo, author], (err, result) => {
+        if(err)     {
+            console.log(err);
+            return res.json({Message: "Error"});}
+        return res.json({Status: "Succes"});
+    })
+});
+
+
+app.get('/recipes', (req, res) => {
+    const sql = "SELECT name, description, photo, author, id FROM recipes";
+    recipeDb.query(sql, (err, data) => {
+        if (err) {
+            console.error("Database error:", err.message);
+            return res.status(500).json({ error: "Failed to fetch recipes" });
+        }
+        res.json(data);
+    });
+});
+
+
+app.get('/recipes/:id', (req, res) => {
+    const recipeId = req.params.id;
+    const sql = "SELECT * FROM recipes WHERE id = ?";
+    
+    recipeDb.query(sql, [recipeId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: "Failed to fetch recipe details" });
+        }
+        if (result.length > 0) {
+            res.json(result[0]); // Send back the recipe details
+        } else {
+            res.status(404).json({ error: "Recipe not found" });
+        }
+    });
+});
+
+
+
+
 
 
 
