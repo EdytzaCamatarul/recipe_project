@@ -1,0 +1,164 @@
+.register-container
+{
+    background: url('../assets/images/banner.png') center center/cover no-repeat;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0);
+    object-fit: contain;
+  }
+
+.register-container > h1 {
+    color: #fff;
+    font-size: 100px;
+    margin-top: -100px;
+  }
+  
+  .register-container > p {
+    margin-top: 8px;
+    color: #fff;
+    font-size: 32px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+      'Lucida Sans', Arial, sans-serif;
+  }
+
+  .register-container > h1 > img 
+  {
+    height: 50%;
+    width: 100%;
+    margin-top: 100px;
+  }
+  
+  .register-btns {
+    margin-top: 32px;
+  }
+  
+  form {
+    background-color: #00236D; 
+    color: white;
+    width: max(33%, 400px);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 60vw;
+  }
+
+form h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+form p {
+  color:red;
+}
+.login-message {
+  color:green;
+}
+form a {
+  color: #fff;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: calc(100% - 10px);
+    padding: 10px 10px 15px 40px; 
+    border: 1px solid #fff;
+
+    font-size: 14px;
+    color: white; 
+    background-color: transparent; 
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+}
+
+.input-group input::placeholder {
+    color: white; 
+    opacity: 1;
+}
+
+.input-group input:focus {
+    outline: none;
+    border: 1px solid #0056CC; 
+    box-shadow: 0 0 5px rgba(0, 85, 204, 0.5);
+}
+
+.input-group::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+}
+
+.input-group.full-name::before {
+    background-image: url('../assets/images/person.png'); /* Person icon */
+    height: 65%;
+    margin-right: 5px;
+}
+
+.input-group.telephone::before {
+    background-image: url('../assets/images/phone.png'); /* Phone icon */
+    height: 70%;
+    margin-right: 5px;
+}
+
+.input-group.email::before {
+    background-image: url('../assets/images/mail.png'); /* Email icon */
+    height: 15px;
+    width: 22px;
+    margin-right: 5px;
+}
+
+.input-group.password::before {
+    background-image: url('../assets/images/lock.png'); /* Lock icon */
+    height: 60%;
+
+}
+
+
+  .register-btns .btn {
+    margin: 6px;
+  }
+  
+  .fa-play-circle {
+    margin-left: 4px;
+  }
+  
+  @media screen and (max-width: 960px) {
+    .register-container 
+    {
+        background: #fff;
+    }
+    .register-container > h1 {
+      font-size: 70px;
+      margin-top: -150px;
+    }
+    
+  }
+  
+  @media screen and (max-width: 768px) {
+    .register-container > h1 {
+      font-size: 50px;
+      margin-top: -100px;
+    }
+  
+    .register-container > p {
+      font-size: 30px;
+    }
+  
+   
+    
+  }
+
