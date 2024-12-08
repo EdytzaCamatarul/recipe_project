@@ -1,0 +1,33 @@
+.star-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    
+}
+.star-rating-noncenter {
+    display: flex;
+
+    gap: 2px;
+    
+}
+
+.star {
+    font-size: 24px;
+    line-height: 1;
+    display: inline-block;
+   
+}
+
+.star.full {
+    color: #FFD700;
+}
+
+.star.empty {
+    color: #ddd; 
+}
+
+.star.partial {
+    color: transparent;
+    position: relative;
+}

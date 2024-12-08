@@ -50,6 +50,7 @@
 form h1 {
     margin-bottom: 20px;
     font-size: 24px;
+    color: #fff;
 }
 
 form p {
@@ -66,6 +67,8 @@ form a {
     position: relative;
     margin-bottom: 15px;
 }
+
+
 
 .input-group input {
     width: calc(100% - 10px);
@@ -89,6 +92,15 @@ form a {
     outline: none;
     border: 1px solid #0056CC; 
     box-shadow: 0 0 5px rgba(0, 85, 204, 0.5);
+}
+
+.input-group input::file-selector-button {
+  border-radius: 10px;
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+  font-weight: bold;
+
 }
 
 .input-group::before {

@@ -9,7 +9,7 @@ function ResetPasswordForm() {
     const [newPassword, setNewPassword] = useState("");
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
-    const { token } = useParams(); // Extract token from URL
+    const { token } = useParams(); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,7 +19,7 @@ function ResetPasswordForm() {
                 newPassword,
             });
             setMessage(response.data.message);
-            setTimeout(() => navigate("/login"), 3000); // Redirect to login after success
+            setTimeout(() => navigate("/login"), 3000); 
         } catch (error) {
             setMessage(error.response?.data?.error || "An error occurred");
         }

@@ -1,30 +1,149 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Button } from './Button'; 
 import './RecipeModal.css';
+import StarRating from './StarRating';
+
 
 const RecipeModal = ({ recipeId, closeModal }) => {
     const [recipe, setRecipe] = useState(null);
+    const [userRating, setUserRating] = useState(0);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [logged, setLogged] = useState(false); {/* needs fix */}
 
     useEffect(() => {
         if (recipeId) {
-            axios.get(`http://localhost:8081/recipes/${recipeId}`)
-                .then(res => {
+            axios
+                .get(`http://localhost:8081/recipes/${recipeId}`)
+                .then((res) => {
                     setRecipe(res.data);
                 })
-                .catch(err => console.log(err));
+                .catch((err) => console.error(err));
         }
     }, [recipeId]);
 
     if (!recipe) return null;
 
+    const token = localStorage.getItem('token');
+
+    const handleStarClick = (star) => {
+        setUserRating(star);
+    };
+
+    const handleSubmitRating = () => {
+        if (userRating < 1 || userRating > 5 || !token) {
+            return;
+        }
+
+        setIsSubmitting(true);
+       
+        if(token) {
+            setLogged(true);
+        axios
+            .post(`http://localhost:8081/recipes/${recipeId}/rate`, { rating: userRating }, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            .then((res) => {
+            
+                setRecipe((prevRecipe) => ({
+                    ...prevRecipe,
+                    rating: res.data.updatedRating,
+                    nr_rating: res.data.totalRatings,
+                }));
+                setUserRating(0);
+            })
+            .catch((err) => {
+                console.error('Failed to submit rating:', err);
+              
+            })
+            .finally(() => {
+                setIsSubmitting(false);
+            });
+        } else {
+            setLogged(false);
+        }
+    };
+
+    const handleRemoveRecipe = () => {
+        if(token) {
+            setLogged(true);
+        axios.delete(`http://localhost:8081/recipes/${recipeId}`, {}, {
+            headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(() => {
+            console.log('Deleted succesfully');
+        })
+        .catch((err) => {
+            console.error('Failed to delete: ', err);
+            console.log(recipeId);
+            return;
+        })
+        closeModal();
+        window.location.reload();
+    }
+    else {
+        setLogged(false);
+    }
+
+    }
+
     return (
-        <div className="recipe-modal">
-            <div className="recipe-modal-content">
-                <span className="close" onClick={closeModal}>&times;</span>
-                <h2>{recipe.name}</h2>
-                <img src={recipe.image} alt={recipe.name} />
-                <p>{recipe.description}</p>
-                <p><strong>Author:</strong> {recipe.author}</p>
+        <div className="recipe-modal-overlay">
+            <div className="recipe-modal">
+                <Button
+                    buttonStyle="btn--primary"
+                    buttonSize="btn--large"
+                    onClick={closeModal}
+                    align="right"
+                >
+                    X
+                </Button>
+                <div className="recipe-header">
+                    <img
+                        src={`/uploads/${recipe.photo}`}
+                        alt={recipe.name}
+                        className="recipe-image"
+                    />
+                    <div className="recipe-details">
+                        <h2 className="recipe-title">{recipe.name}</h2>
+                        <StarRating rating={recipe.rating} centered={'-noncentered'} />
+                        <div className="recipe-author">
+                            Nr. ratinguri: {recipe.nr_rating ? recipe.nr_rating : 0}
+                            <br />
+                            Author: <h2>{recipe.author}</h2>
+                            <p> ‎ </p>
+                            {recipe.author_email === localStorage.getItem('email') ? <Button onClick={() => handleRemoveRecipe()} buttonStyle='btn--red' > Delete </Button> : null}
+                        </div>
+                    </div>
+                    <div className="rate-section">
+                        <h3>Rate this recipe</h3>
+                        <div className="rate-stars">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <span
+                                    key={star}
+                                    className={`user_star${userRating >= star ? '_selected' : ''}`}
+                                    onClick={() => handleStarClick(star)}
+                                >
+                                    ★
+                                </span>
+                            ))}
+
+                        </div>
+                        <Button
+                            buttonStyle="btn--green"
+                            buttonSize="btn--medium"
+                            onClick={handleSubmitRating}
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Submitting...' : 'Submit'}
+                        </Button>
+                       {logged ? <p>Trebuie să fi logat!</p> : null}
+                    </div>
+                </div>
+                <div className="recipe-description">
+                    <h3>Description</h3>
+                    <p>{recipe.description}</p>
+                </div>
             </div>
         </div>
     );

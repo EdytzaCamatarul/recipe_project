@@ -66,18 +66,27 @@ const authenticateToken = (req, res, next) => {
 };
 
 app.get("/users", authenticateToken, (req, res) => {
-    const sql = "SELECT name, phone, email FROM users WHERE email = ?";
+    const sql = "SELECT name, phone, email, recipes FROM users WHERE email = ?";
     db.query(sql, [req.user.email], (err, data) => {
         if (err) {
             return res.status(500).json({ error: "Failed to fetch profile data" });
         }
         if (data.length > 0) {
-            return res.json({ email: data[0].email, name: data[0].name, phone: data[0].phone });
+            return res.json({ email: data[0].email, name: data[0].name, phone: data[0].phone , recipes: data[0].recipes});
         }
         return res.status(404).json({ message: "User not found" });
     });
 });
 
+app.put('/users/increment', authenticateToken, (req,res) => {
+    const sql = 'UPDATE users SET recipes = recipes + 1 WHERE email = ?'
+    db.query(sql, [req.user.email], (err,data) => {
+        if(err) {
+            return res.status(500).json({error: 'Failed to update recipe count'});
+        }
+        
+    })
+})
 
 const crypto = require('crypto');
 
@@ -177,9 +186,10 @@ app.post('/recipes', authenticateToken, upload.single('image'), (req, res) => {
     const name = req.body.name;
     const description = req.body.description;
     const author = req.user.name;
-    const sql = "INSERT INTO recipes (name, description, photo, author) VALUES (?, ?, ?, ?)";
+    const author_email = req.user.email;
+    const sql = "INSERT INTO recipes (name, description, photo, author, author_email) VALUES (?, ?, ?, ?, ?)";
 
-    recipeDb.query(sql, [name, description, photo, author], (err, result) => {
+    recipeDb.query(sql, [name, description, photo, author, author_email], (err, result) => {
         if(err)     {
             console.log(err);
             return res.json({Message: "Error"});}
@@ -189,7 +199,7 @@ app.post('/recipes', authenticateToken, upload.single('image'), (req, res) => {
 
 
 app.get('/recipes', (req, res) => {
-    const sql = "SELECT name, description, photo, author, id FROM recipes";
+    const sql = "SELECT name, description, photo, author, id, rating, nr_rating, author_email FROM recipes";
     recipeDb.query(sql, (err, data) => {
         if (err) {
             console.error("Database error:", err.message);
@@ -216,8 +226,52 @@ app.get('/recipes/:id', (req, res) => {
     });
 });
 
+app.delete('/recipes/:id', authenticateToken,(req, res) => {
+    const recipeId = req.params.id;
+    const sql = "DELETE FROM recipes WHERE id = ?";
+    
+    recipeDb.query(sql, [recipeId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: "Failed to fetch recipe details" });
+        }
+        
+    });
+});
 
 
+app.post('/recipes/:id/rate', authenticateToken,(req, res) => {
+    const recipeId = req.params.id;
+    const { rating } = req.body;
+
+    if (rating < 1 || rating > 5) {
+        return res.status(400).json({ error: "Rating must be between 1 and 5" });
+    }
+
+    const fetchSql = "SELECT rating, nr_rating FROM recipes WHERE id = ?";
+    recipeDb.query(fetchSql, [recipeId], (err, results) => {
+        if (err || results.length === 0) {
+            return res.status(404).json({ error: "Recipe not found" });
+        }
+
+        const currentRating = results[0].rating ? results[0].rating : 0;
+        const currentNrRating = results[0].nr_rating ? results[0].nr_rating : 0;
+
+        const newNrRating = currentNrRating + 1;
+        const newRating = ((currentRating * currentNrRating) + rating) / newNrRating;
+
+        const updateSql = "UPDATE recipes SET rating = ?, nr_rating = ? WHERE id = ?";
+        recipeDb.query(updateSql, [newRating, newNrRating, recipeId], (err, updateResult) => {
+            if (err) {
+                return res.status(500).json({ error: "Failed to update rating" });
+            }
+            return res.json({
+                message: "Rating submitted successfully",
+                updatedRating: newRating,
+                totalRatings: newNrRating
+            });
+        });
+    });
+});
 
 
 

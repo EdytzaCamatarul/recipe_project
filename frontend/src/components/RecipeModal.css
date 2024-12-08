@@ -1,46 +1,118 @@
-.recipe-modal {
+.recipe-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-.recipe-modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 600px;
+
+.recipe-modal {
+    background-color: #fff;
     width: 90%;
-    text-align: center;
-}
-
-.recipe-modal img {
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
+    max-width: 1200px;
+    min-width: 400px;
     border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    min-height: 500px;
+    max-height: 90%; 
+    overflow-y: auto;
 }
 
-.recipe-modal h2 {
-    font-size: 24px;
-    margin: 10px 0;
+.recipe-header {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 16px;
+    position: relative;
 }
 
-.recipe-modal p {
-    font-size: 18px;
+.recipe-image {
+    width: 20%;
+    height: 20%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.recipe-details {
+    flex: 1;
+}
+
+.recipe-details h3 {
+    justify-content: left;
+    align-items: left;
+    
+}
+
+.recipe-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+    margin: auto;
+}
+
+.recipe-author {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.rate-section {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    padding: 16px;
+}
+
+.rate-section h3 {
+    font-size: 1rem;
+    margin: 0 0 8px;
     color: #333;
 }
 
-.recipe-modal .close {
+.rate-stars {
+    margin: 8px 0;
+    font-size: 1.5rem;
+    color: #f5c518;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+.user_star {
+    color: #eee;
+
+}
+.user_star_selected{
+    color: #f5c518;
+    
+}
+
+.recipe-description {
+    padding: 16px;
+    border-top: 1px solid #ddd;
+}
+
+.close-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 30px;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
     cursor: pointer;
+    color: #333;
+}
+
+.close-btn:hover {
+    color: #000;
 }

@@ -16,7 +16,10 @@ function Profile() {
                 .get("http://localhost:8081/users", {
                     headers: { Authorization: `Bearer ${token}` },
                 })
-                .then((res) => setProfile(res.data))
+                .then((res) => {
+                    localStorage.setItem('email', res.data.email);
+                    setProfile(res.data)
+                })
                 .catch((err) => {
                     console.error(err);
                     alert("Failed to load profile data");
@@ -38,12 +41,12 @@ function Profile() {
                 <div className="box-right">
                 <p>Email: {profile.email}</p>
                 <p>Phone: {profile.phone}</p>
-                <p>College group: {profile.phone}</p>
+                <p>Total recipes: {profile.recipes}</p>
                 </div>
             </div>
+            <p> ‎ </p> { /* best fix ever lmfao */}
             <p> ‎ </p>
-            <p> ‎ </p>
-            <Button buttonStyle='btn--green' > Add Recipe </Button>
+            <Button buttonStyle='btn--green' link ='/add-recipe' buttonSize='btn--large' > Add Recipe </Button>
         </div>
 
         
