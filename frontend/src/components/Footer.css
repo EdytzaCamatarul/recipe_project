@@ -1,6 +1,6 @@
 .footer-container {
   position: relative;
-  background-color: transparent; /* Matches the black bar in the image */
+  background-color: transparent;
   color: #fff;
   text-align: center;
   overflow: hidden;
@@ -18,11 +18,11 @@
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  position: absolute; /* Absolute positioning to overlay above the SVG */
-  top: 50%; /* Centers vertically */
+  position: absolute; 
+  top: 50%; 
   left: 50%;
-  transform: translate(-50%, -50%); /* Centers both horizontally and vertically */
-  z-index: 1; /* Ensures the icons are above the SVG */
+  transform: translate(-50%, -50%); 
+  z-index: 1; 
   padding: 1rem 0;
 }
 
@@ -37,7 +37,7 @@
   color: #1f98f4;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
   .footer-icons {
     gap: 0.7rem;

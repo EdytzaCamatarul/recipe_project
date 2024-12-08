@@ -1,8 +1,9 @@
 import React from 'react';
 import './Cards.css';
 import { Link } from 'react-router-dom';
+import StarRating from './StarRating';
 
-function RecipeCard({ name, description, image, author }) {
+function RecipeCard({ name, image, author, rating, ratingNo }) {
     return (
 
         <li className="cards__item">
@@ -12,7 +13,10 @@ function RecipeCard({ name, description, image, author }) {
                 </figure>
                 <div className="cards__item__info">
                     <h5 className="cards__item__text">{name}</h5>
-                    <p className="cards__item__text">{description}</p>
+                    <StarRating rating={rating}/>
+                    Nr. ratinguri: {ratingNo ? <p className="cards__item__text">{ratingNo}</p> : <p className="cards__item__text">0</p>}
+                    <p>Author</p>
+                    <h5 className="cards__item__text">{author}</h5>
                 </div>
             </div>
         </li>

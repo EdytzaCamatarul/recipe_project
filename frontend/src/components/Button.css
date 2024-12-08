@@ -32,6 +32,11 @@
     color: #fff;
     border-radius: 13px;
 }
+.btn--red {
+    background-color: #cc3232;
+    color: #fff;
+    border-radius: 13px;
+}
 
 .btn--medium {
     padding: 8px 20px;
