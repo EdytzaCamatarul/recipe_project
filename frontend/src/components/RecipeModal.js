@@ -41,8 +41,6 @@ const RecipeModal = ({ recipeId, closeModal }) => {
         
         setIsSubmitting(true);
        
-        if(token) {
-            setLogged(true);
         axios
             .post(`http://localhost:8081/recipes/${recipeId}/rate`, { rating: userRating }, {
                 headers: { Authorization: `Bearer ${token}` },
@@ -63,35 +61,31 @@ const RecipeModal = ({ recipeId, closeModal }) => {
             .finally(() => {
                 setIsSubmitting(false);
             });
-        } else {
-            setLogged(false);
-        }
+    
     };
 
     const handleRemoveRecipe = () => {
-        if(token) {
+        if(!token) {
             setLogged(true);
-            axios.delete(`http://localhost:8081/recipes/${recipeId}`, {
-                
-                headers: { Authorization: `Bearer ${token}` },
-                data: {photo: recipe.photo}
-                })
-            .then(() => {
-                console.log('Deleted successfully');
+            return;
+        }
+
+
+        setLogged(false);
+        axios.delete(`http://localhost:8081/recipes/${recipeId}`, {
+            
+            headers: { Authorization: `Bearer ${token}` },
+            data: {photo: recipe.photo}
             })
-            .catch((err) => {
-                console.error('Failed to delete: ', err);
-                console.log(recipeId);
-            });
+        .then(() => {
+            console.log('Deleted successfully');
+        })
+        .catch((err) => {
+            console.error('Failed to delete: ', err);
+            console.log(recipeId);
+        });
 
         window.location.reload();
-            
-        
-        }
-        else {
-            setLogged(false);
-        }
-
     }
 
     return (
