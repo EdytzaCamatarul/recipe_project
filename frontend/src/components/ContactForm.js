@@ -9,7 +9,7 @@ const ContactForm = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const form = useRef(); // Create a reference for the form element
+  const form = useRef(); 
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ const ContactForm = () => {
       to_name: 'Patroane',
     };
 
-    // Ensure you pass form.current as the third argument to sendForm
+    
     emailjs
       .sendForm(serviceKey, templateKey, form.current, publicKey)
       .then(
@@ -49,7 +49,7 @@ const ContactForm = () => {
             <input
               type="text"
               placeholder="First Name"
-              name="firstName"  // Ensure this matches the variable in templateParams
+              name="firstName"  
               className="form-input"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
@@ -59,7 +59,7 @@ const ContactForm = () => {
             <input
               type="text"
               placeholder="Last Name"
-              name="lastName"   // Ensure this matches the variable in templateParams
+              name="lastName"   
               className="form-input"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -69,7 +69,7 @@ const ContactForm = () => {
             <input
               type="email"
               placeholder="Email"
-              name="email"   // Ensure this matches the variable in templateParams
+              name="email"   
               className="form-input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -79,7 +79,7 @@ const ContactForm = () => {
         <div className="form-right">
           <textarea
             placeholder="Message"
-            name="message"  // Ensure this matches the variable in templateParams
+            name="message"  
             className="form-textarea"
             value={message}
             onChange={(e) => setMessage(e.target.value)}

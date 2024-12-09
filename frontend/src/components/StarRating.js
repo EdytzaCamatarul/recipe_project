@@ -19,7 +19,7 @@ const StarRating = ({ rating , centered}) => {
                         background: `linear-gradient(to right, #FFD700 ${partialStarWidth}%, #ddd ${partialStarWidth}%)`,
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
-                    }}> {/* Bug  ciudat steaua devine patrat cand se da un rating nou */}
+                    }}> {/* Bug  ciudat steaua devine patrat cand se da un rating nou. Habar nu am sa il rezolv fuck it we ball. */}
                     ★
                 </span>
             )}

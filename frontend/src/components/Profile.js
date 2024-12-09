@@ -44,7 +44,7 @@ function Profile() {
                 <p>Total recipes: {profile.recipes}</p>
                 </div>
             </div>
-            <p> ‎ </p> { /* best fix ever lmfao */}
+            <p> ‎ </p> { /* Best fix ever lmfao */}
             <p> ‎ </p>
             <Button buttonStyle='btn--green' link ='/add-recipe' buttonSize='btn--large' > Add Recipe </Button>
         </div>
