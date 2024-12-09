@@ -93,13 +93,22 @@ function RecipeForm() {
         }
     };
 
-    const characterLimit = 3000;
+    const descriptionLimit = 3000;
+    const nameLimit = 40;
 
-    const handleInputChange = (e) => {
+    const handleDescriptionChange = (e) => {
         const value = e.target.value;
 
-        if (value.length <= characterLimit) {
+        if (value.length <= descriptionLimit) {
             setDescription(value);
+        }
+    };
+
+    const handleNameChange = (e) => {
+        const value = e.target.value;
+
+        if (value.length <= nameLimit) {
+            setName(value);
         }
     };
 
@@ -112,18 +121,20 @@ function RecipeForm() {
                     <input
                         type="text"
                         placeholder="Recipe name"
-                        onChange={e => setName(e.target.value)}
+                        value={name}
+                        onChange={handleNameChange}
                     />
                 </div>
+                {name.length}/{nameLimit}
                 <div className="input-group">
                     <input
                         type="text"
                         placeholder="Description"
                         value={description}
-                        onChange={handleInputChange}
+                        onChange={handleDescriptionChange}
                     />
                     <div className="char-counter">
-                        {description.length}/{characterLimit}
+                        {description.length}/{descriptionLimit}
                     </div>
                 </div>
 
@@ -131,11 +142,10 @@ function RecipeForm() {
                     <input type="file" id="file-input" 
                     className="file-input" accept="image/*"
                     onChange={handleImageChange}/>
-                    <label for="file-input" className="upload-label" >
+                    <label htmlFor="file-input" className="upload-label" >
                         Upload
                     </label>
                 </div>
-
                 {emptyForm && <p>Numele, descrierea și imaginea nu pot fi goale</p>}
                 {succes && <p style={{ color: 'green' }}>Adăugat cu succes </p>}
                 <Button
