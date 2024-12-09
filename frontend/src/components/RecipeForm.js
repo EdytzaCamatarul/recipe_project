@@ -127,11 +127,11 @@ function RecipeForm() {
                     </div>
                 </div>
 
-                <div class="input-group">
+                <div className="input-group">
                     <input type="file" id="file-input" 
-                    class="file-input" accept="image/*"
+                    className="file-input" accept="image/*"
                     onChange={handleImageChange}/>
-                    <label for="file-input" class="upload-label" >
+                    <label for="file-input" className="upload-label" >
                         Upload
                     </label>
                 </div>
