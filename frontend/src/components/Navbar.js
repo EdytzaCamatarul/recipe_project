@@ -119,12 +119,12 @@ function Navbar() {
                         ) : (
                             <>
                                 <li className='nav-item'>
-                                    <Link to='/login' className='nav-links-mobile' onClick={closeMobileMenu}>
+                                    <Link to='/login' className='nav-links-mobile' onClick={closeMobileMenu} style={window.innerWidth <= 960 ? {color:'black'} : {color:'white'}}>
                                         Login
                                     </Link>
                                 </li>
                                 <li className='nav-item'>
-                                    <Link to='/register' className='nav-links-mobile' onClick={closeMobileMenu}>
+                                    <Link to='/register' className='nav-links-mobile' onClick={closeMobileMenu} style={window.innerWidth <= 960 ? {color:'black'} : {color:'white'}}>
                                         Register
                                     </Link>
                                 </li>

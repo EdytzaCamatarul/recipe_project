@@ -25,8 +25,6 @@ const recipeDb = mysql.createConnection({
 });
 
 
-
-
 app.post('/users', (req, res) => {
     const sql = "SELECT * FROM users WHERE email = ? AND password = ?";
     db.query(sql, [req.body.email, req.body.password], (err, data) => {
@@ -43,10 +41,10 @@ app.post('/users', (req, res) => {
 });
 
 app.put('/users', (req, res) => {
-    const sql = "INSERT INTO users (name, phone, email, password, recipes) VALUES (?, ?, ?, ?, '')";
+    const sql = "INSERT INTO users (name, phone, email, password) VALUES (?, ?, ?, ?)";
     db.query(sql, [req.body.name, req.body.phone, req.body.email, req.body.password], (err, data) => {
         if (err) {
-            return res.status(500).json({ error: "Failed to create user" });
+            return res.status(500).json({ error: "Failed to create user" + err});
         }
         return res.json({ message: "User created successfully" });
     });
