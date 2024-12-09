@@ -186,7 +186,7 @@ Running the frontend is simpler. After downloading the project:
    npm start
    ```  
 
-If all went well, a browser page with the project should open automatically. Now you can create an account, add a recipe, or explore the site. Bon appétit! 😄  
+If all went well, a browser page with the project should open automatically. Now you can create an account, add a recipe, or explore the site. Bon appétit! :D
 
 ---
 
@@ -197,7 +197,7 @@ If all went well, a browser page with the project should open automatically. Now
 3. **Password Reset via Email** (receive an email with a unique link to reset your password — note: the link works only on the computer running the project)  
 4. **Add Recipes**, including images uploaded by users, a rating system, and the ability to delete your own recipes.  
 5. **Profile Page**, complete with all user information.  
-6. **Feedback Form** (I receive the emails, so please don’t spam! 😅)  
+6. **Feedback Form** (I receive the emails, so please don’t spam! :) )  
 7. **Recipe Page** where all published recipes can be viewed, with search options (by recipe name or author) and filtering/sorting (by rating).  
 8. **Detailed Recipe Information** accessible by clicking on a recipe.  
 9. **Mobile-friendly Design** for smaller screens (phones/tablets).  
