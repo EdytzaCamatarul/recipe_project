@@ -138,7 +138,7 @@ const RecipeModal = ({ recipeId, closeModal }) => {
                         >
                             {isSubmitting ? 'Submitting...' : 'Submit'}
                         </Button>
-                        {logged && <p style={{color:'red'}}>Trebuei sa fii logat</p>}
+                        {logged && <p style={{color:'red'}}>Trebuie sa fii logat</p>}
                        
                     </div>
                 </div>
