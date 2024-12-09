@@ -19,6 +19,7 @@ function LoginForm() {
             .then(res => {
                 console.log(res.data);
                 if (res.data.token) {
+                    localStorage.setItem('email', email);
                     localStorage.setItem('token', res.data.token);
 
                     navigate('/');
@@ -38,7 +39,7 @@ function LoginForm() {
         <div className='register-container'>
             <form onSubmit={handleSubmit}>
                 <h1>Logheaza-te, {"\n"}chiorăie mațele!</h1>
-                {message && <p className="login-message">{message}</p>}
+                {message && <p className="login-message" style={{color:'red'}}>{message}</p>}
                 <div className="input-group email">
                     <input type="email" placeholder="E-mail" 
                         onChange={e => setEmail(e.target.value)} />

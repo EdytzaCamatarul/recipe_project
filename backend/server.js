@@ -226,17 +226,33 @@ app.get('/recipes/:id', (req, res) => {
     });
 });
 
-app.delete('/recipes/:id', authenticateToken,(req, res) => {
+const fs = require('fs');
+
+app.delete('/recipes/:id', authenticateToken, (req, res) => {
     const recipeId = req.params.id;
     const sql = "DELETE FROM recipes WHERE id = ?";
+    const fileName = req.body.photo;
+    console.log(fileName);
+
+    const filePath = `../frontend/public/uploads/${fileName}`;
+
+    fs.unlink(filePath, (err) => {
+        if (err) {
+            console.error(`Error deleting file: ${err.message}`);
+            return res.status(500).send('Failed to delete file');
+        }
+    });
     
     recipeDb.query(sql, [recipeId], (err, result) => {
         if (err) {
-            return res.status(500).json({ error: "Failed to fetch recipe details" });
+            return res.status(500).json({ error: "Failed to delete recipe" });
         }
+        res.status(200).json({ message: 'Deleted successfully' });
+
         
     });
 });
+
 
 
 app.post('/recipes/:id/rate', authenticateToken,(req, res) => {

@@ -17,7 +17,6 @@ function Profile() {
                     headers: { Authorization: `Bearer ${token}` },
                 })
                 .then((res) => {
-                    localStorage.setItem('email', res.data.email);
                     setProfile(res.data)
                 })
                 .catch((err) => {
@@ -37,6 +36,7 @@ function Profile() {
             <div className="profile-box">
             <div className = 'box-left'><img src = {logo}></img>
             <p>{profile.name}</p>
+            
             </div>
                 <div className="box-right">
                 <p>Email: {profile.email}</p>
@@ -44,7 +44,7 @@ function Profile() {
                 <p>Total recipes: {profile.recipes}</p>
                 </div>
             </div>
-            <p> ‎ </p> { /* best fix ever lmfao */}
+            <p> ‎ </p> { /* Best fix ever lmfao */}
             <p> ‎ </p>
             <Button buttonStyle='btn--green' link ='/add-recipe' buttonSize='btn--large' > Add Recipe </Button>
         </div>

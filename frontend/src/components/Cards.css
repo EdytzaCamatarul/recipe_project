@@ -7,9 +7,10 @@
 
 .cards__background{
   padding: 4rem;
-  background: url('../assets/images/banner.png');
+  background: url('../assets/images/banner.png') center center/cover no-repeat;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  height: 100%;
+
 }
 
 h1 {
@@ -145,6 +146,64 @@ h1 {
   color: #999;
   text-align: center;
 }
+
+
+.cards__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 20px 0;
+}
+
+.cards__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 100px;
+  background-color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: green;
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.cards__arrow--left {
+  left: -70px; 
+}
+
+.cards__arrow--right {
+  right: -70px; 
+}
+
+.cards__arrow:hover {
+  transform: translateY(-50%) scale(1.1); 
+}
+
+.cards__content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cards__content-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.cards__content-exit {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
 
 
 @media only screen and (min-width: 1200px) {
