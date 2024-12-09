@@ -31,10 +31,14 @@ const RecipeModal = ({ recipeId, closeModal }) => {
     };
 
     const handleSubmitRating = () => {
-        if (userRating < 1 || userRating > 5 || !token) {
+        if(!token) {
+            setLogged(true);
             return;
         }
-
+        if (userRating < 1 || userRating > 5) {
+            return;
+        }
+        
         setIsSubmitting(true);
        
         if(token) {
@@ -140,6 +144,7 @@ const RecipeModal = ({ recipeId, closeModal }) => {
                         >
                             {isSubmitting ? 'Submitting...' : 'Submit'}
                         </Button>
+                        {logged && <p style={{color:'red'}}>Trebuei sa fii logat</p>}
                        
                     </div>
                 </div>
