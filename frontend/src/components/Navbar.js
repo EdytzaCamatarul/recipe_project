@@ -27,8 +27,8 @@ function Navbar() {
                 if (decoded.exp > currentTime) {
                     setIsLoggedIn(true);
                 } else {
-                    localStorage.removeItem('token'); // Remove expired token
-                    localStorage.removeItem('email');
+                    localStorage.removeItem('token'); // Remove expired shit
+                    localStorage.removeItem('email'); 
                     setIsLoggedIn(false);
                 }
             } catch (error) {
@@ -55,7 +55,7 @@ function Navbar() {
 
     const handleLogout = () => {
         localStorage.removeItem('token'); // Clear token
-        localStorage.removeItem('email');
+        localStorage.removeItem('email'); // Clear email
         setIsLoggedIn(false);
         navigate('/');
         window.location.reload();
