@@ -95,13 +95,47 @@ form a {
 }
 
 .input-group input::file-selector-button {
-  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid #fff; 
   background: transparent;
-  color: #fff;
-  border-color: #fff;
-  font-weight: bold;
-
+  padding: 10px 30px;
+  border-radius: 20px;
+  color: #fff; 
+  font-size: 16px; 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  cursor: pointer;
+  transition: all 0.2s ease-in-out; 
+  
 }
+
+.input-group input::file-selector-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.file-input {
+  display: none;
+}
+.upload-label {
+  border: 2px solid #fff;
+  background: transparent;
+  padding: 10px 30px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.upload-label:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
 
 .input-group::before {
     content: '';

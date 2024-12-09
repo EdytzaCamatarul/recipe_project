@@ -71,16 +71,26 @@ function Navbar() {
                     <div className='menu-icon' onClick={handleClick}>
                         <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                     </div>
-
+                   
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                       
                         <li className='nav-item'>
-                            <Link to='/recipes' className='nav-links' onClick={closeMobileMenu}>
+                            <Link 
+                                to='/recipes' 
+                                className='nav-links' 
+                                onClick={closeMobileMenu} 
+                                style={window.innerWidth <= 960 ? {color:'black'} : {color:'white'}}>
                                 Recipes
                             </Link>
                         </li>
 
                         <li className='nav-item'>
-                            <Link to='/add-recipe' className='nav-links' onClick={closeMobileMenu}>
+                            <Link 
+                                to='/add-recipe' 
+                                className='nav-links' 
+                                onClick={closeMobileMenu}
+                                style={window.innerWidth <= 960 ? {color:'black'} : {color:'white'}}
+                              >
                                 Add Recipe
                             </Link>
                         </li>
@@ -88,15 +98,20 @@ function Navbar() {
                         {isLoggedIn ? (
                             location.pathname === '/profile' ? (
                                 <li className='nav-item'>
-                                    <Link to='/' className='nav-links-mobile' onClick={() => {
+                                    <Link to='/' className='nav-links-mobile' 
+                                        onClick={() => {
                                         handleLogout();
                                         closeMobileMenu();
-                                    }}>
+                                    }}
+                                    style={window.innerWidth <= 960 ? {color:'black'} : {color:'white'}}>
                                         Logout
                                     </Link>
                                 </li>) : (
                                 <li className='nav-item'>
-                                    <Link to='/profile' className='nav-links-mobile' onClick={closeMobileMenu}>
+                                    <Link to='/profile' 
+                                    className='nav-links-mobile' 
+                                    onClick={closeMobileMenu}
+                                    style={window.innerWidth <= 960 ? {color:'black'} : {color:'white'}}>
                                         Profile
                                     </Link>
                                 </li>

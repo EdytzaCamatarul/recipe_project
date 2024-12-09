@@ -13,7 +13,8 @@ export const Button = ({
   buttonStyle,
   buttonSize,
   link,
-  align
+  align,
+  color
 }) => {
   const checkButtonStyle = STYLES.includes(buttonStyle)
     ? buttonStyle
@@ -21,6 +22,7 @@ export const Button = ({
 
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
   const alignmentClass = align === 'right' ? 'btn--right' : align === 'center' ? 'btn--center' : '';
+  
 
   if (link) {
     // Render as a link if the `link` prop is provided
@@ -29,11 +31,13 @@ export const Button = ({
         to={link}
         className={`btn-mobile ${checkButtonStyle} ${checkButtonSize} ${alignmentClass}`}
         onClick={onClick}
+        color={color}
       >
         {children}
       </Link>
     );
   }
+
 
   // Render as a button if no `link` prop is provided
   return (
@@ -41,6 +45,7 @@ export const Button = ({
       className={`btn ${checkButtonStyle} ${checkButtonSize} ${alignmentClass}`}
       onClick={onClick}
       type={type}
+      color={color}
     >
       {children}
     </button>

@@ -74,3 +74,10 @@
     color: #fff;
     transition: 250ms;
 }
+
+.btn--red:hover {
+    transition: all 0.3s ease-out;
+    background: #a32323;
+    color: #fff;
+    transition: 250ms;
+}

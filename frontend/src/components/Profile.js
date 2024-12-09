@@ -17,7 +17,6 @@ function Profile() {
                     headers: { Authorization: `Bearer ${token}` },
                 })
                 .then((res) => {
-                    localStorage.setItem('email', res.data.email);
                     setProfile(res.data)
                 })
                 .catch((err) => {
@@ -37,6 +36,7 @@ function Profile() {
             <div className="profile-box">
             <div className = 'box-left'><img src = {logo}></img>
             <p>{profile.name}</p>
+            
             </div>
                 <div className="box-right">
                 <p>Email: {profile.email}</p>

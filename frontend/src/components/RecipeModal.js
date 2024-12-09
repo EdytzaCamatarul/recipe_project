@@ -67,23 +67,26 @@ const RecipeModal = ({ recipeId, closeModal }) => {
     const handleRemoveRecipe = () => {
         if(token) {
             setLogged(true);
-        axios.delete(`http://localhost:8081/recipes/${recipeId}`, {}, {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-        .then(() => {
-            console.log('Deleted succesfully');
-        })
-        .catch((err) => {
-            console.error('Failed to delete: ', err);
-            console.log(recipeId);
-            return;
-        })
-        closeModal();
+            axios.delete(`http://localhost:8081/recipes/${recipeId}`, {
+                
+                headers: { Authorization: `Bearer ${token}` },
+                data: {photo: recipe.photo}
+                })
+            .then(() => {
+                console.log('Deleted successfully');
+            })
+            .catch((err) => {
+                console.error('Failed to delete: ', err);
+                console.log(recipeId);
+            });
+
         window.location.reload();
-    }
-    else {
-        setLogged(false);
-    }
+            
+        
+        }
+        else {
+            setLogged(false);
+        }
 
     }
 
@@ -137,7 +140,7 @@ const RecipeModal = ({ recipeId, closeModal }) => {
                         >
                             {isSubmitting ? 'Submitting...' : 'Submit'}
                         </Button>
-                       {logged ? <p>Trebuie să fi logat!</p> : null}
+                       
                     </div>
                 </div>
                 <div className="recipe-description">
