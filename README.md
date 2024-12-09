@@ -57,4 +57,24 @@ II. FRONTEND
 
 Pentru a rula frontend-ul este simplu, dupa ce ati descarcat proiectul, tot ce trebuie este sa mergeti in terminal, apoi navigati in directorul frontend si sa rulati comanda npm install si npm start.
 
-Daca toate au mers bine, atunci ar trebui sa fiti rediretionat automat la o pagina de browser care contine proiectul. Bon appetit ;)
+Daca toate au mers bine, atunci ar trebui sa fiti rediretionat automat la o pagina de browser care contine proiectul. Acum poti sa iti creezi un cont, sa adaugi o reteta sau orice iti mai trece prin cap. Bon appetit ;)
+
+Functionalitati:
+1. Creare de cont
+2. Logare cu token (ramanai logat chiar daca inchizi pagina sau opresti proiectul din terminal)
+3. Resetare de parola prin email (primesti un email cu un link unic care te va duce la o pagina pentru resetarea parolei PS: Link-ul merge doar de pe calculatorul unde proiectul ruleaza, logic :) )
+4. Adaugare de retete care contin si imagini puse de user, un sistem de rating dar si posibilitatea de a sterge retetele detinute de tine.
+5. Pagina de profil, completa cu toate datele utilizatorului.
+6. Trimitere de feedback printr-un formular (eu primesc email-urile so pls don't spam)
+7. Pagina de retete, unde se pot gasi toate retetele publicate vreodata, dar si modalitati de cautare (dupa numele retetei sau numele autorului) sau de filtrare/sortare (dupa rating)
+8. Informatii detaliate despre reteta daca dai click pe ea.
+9. Tot site-ul este adaptat si pentru ecranele mai mici (telefoane / tablete)
+
+To be added:
+1. Posibilitatea de a adauga o poza de profil
+2. Posibilitatea de a schimba numarul de telefon/adresa de email/numele
+3. Folosirea fisierului .env pentru a stoca lucruri repetitive (deocamdata o problema cu libraria crypto nu ma lasa sa fac asta)
+4. More stuff...
+
+
+
