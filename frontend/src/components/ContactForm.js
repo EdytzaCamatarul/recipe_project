@@ -13,10 +13,10 @@ const ContactForm = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-
-    const serviceKey = 'service_bkyydsd';
-    const templateKey = 'template_afqc7w7';
-    const publicKey = '-ZvEfHVSiuXBvY9zp';
+    // add EmailJS tokens for form to work properly
+    const serviceKey = '';
+    const templateKey = '';
+    const publicKey = '';
 
     const templateParams = {
       from_firstName: firstName,
