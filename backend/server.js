@@ -99,8 +99,8 @@ require('dotenv').config();
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'itchefteam@gmail.com',
-        pass: 'pipz eqld btbg goth'
+        user: 'email', // modify these 2 lines with the email and application password.
+        pass: 'application pass'
     }
 });
 
