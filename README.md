@@ -1,4 +1,111 @@
 # recipe_project
+---
+
+EN
+
+---
+
+A basic website for publishing recipes online, made by food enthusiasts for food enthusiasts.
+
+### Running the Project:
+
+Before we begin, you need **Node.js (npm)**, which can be installed by following the steps here: [Node.js installation](https://nodejs.org/en/download/package-manager).  
+Additionally, you'll need **Express.js**, which will be installed later.  
+If you encounter issues with libraries, all the libraries used are listed in the `package.json` files under the **dependencies** section (both for the frontend and backend).
+
+---
+
+### I. BACKEND
+
+The backend setup is a bit more complex, requiring multiple steps:  
+
+1. First, you need a local database. For this, we use the **XAMPP** application, which you can download from [here](https://www.apachefriends.org/index.html).  
+2. After installing XAMPP, the servers need to be started. You can do this by going to the **Manage Servers** section and clicking the **Start All** button.  
+3. Then, access [http://localhost/dashboard/](http://localhost/dashboard/), where you’ll see a Welcome screen confirming XAMPP is successfully installed and running. From here, go to the **phpMyAdmin** tab.  
+4. In **phpMyAdmin**, you can view your existing databases. Instead of altering anything, create two new databases named **recipes** and **users**. The button for creating a new database is located in the top-left corner under the phpMyAdmin logo.  
+5. After creating the two new databases, click on **recipes**, then go to the **SQL** tab at the top of the page, and paste the following command exactly as it is:
+
+```sql
+CREATE TABLE `recipes` (
+  `name` text DEFAULT NULL,
+  `author` text DEFAULT NULL,
+  `author_email` text NOT NULL,
+  `description` text DEFAULT NULL,
+  `rating` float DEFAULT NULL,
+  `nr_rating` int(11) DEFAULT NULL,
+  `photo` text DEFAULT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `recipes`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `recipes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+```
+
+6. The table should now be created successfully. Next, navigate to the **users** database and, again in the **SQL** tab, run the following command:
+
+```sql
+CREATE TABLE `users` (
+  `name` text NOT NULL,
+  `phone` text NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  `recipes` int(11) NOT NULL DEFAULT 0,
+  `reset_token` varchar(255) DEFAULT NULL,
+  `token_expiry` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `users`
+  ADD UNIQUE KEY `email` (`email`) USING HASH,
+  ADD UNIQUE KEY `phone` (`phone`) USING HASH;
+```
+
+7. If the commands were entered correctly, you should now have the `recipes` table in the **recipes** database and the `users` table in the **users** database.  
+8. Now, open a terminal, navigate to the **backend** folder, and run `npm install`, followed by `npm start`. If everything worked correctly, you should see a message saying:  
+   **Listening on port 8081...**
+
+---
+
+### II. FRONTEND
+
+Running the frontend is simpler. After downloading the project:  
+
+1. Open a terminal, navigate to the **frontend** directory, and run:  
+   ```bash
+   npm install
+   npm start
+   ```  
+
+If all went well, a browser page with the project should open automatically. Now you can create an account, add a recipe, or explore the site. Bon appétit! :D
+
+---
+
+### Features:
+
+1. **Account Creation**
+2. **Token-based Login** (stay logged in even if you close the browser or stop the project in the terminal)
+3. **Password Reset via Email** (receive an email with a unique link to reset your password — note: the link works only on the computer running the project)  
+4. **Add Recipes**, including images uploaded by users, a rating system, and the ability to delete your own recipes.  
+5. **Profile Page**, complete with all user information.  
+6. **Feedback Form** (I receive the emails, so please don’t spam! :) )  
+7. **Recipe Page** where all published recipes can be viewed, with search options (by recipe name or author) and filtering/sorting (by rating).  
+8. **Detailed Recipe Information** accessible by clicking on a recipe.  
+9. **Mobile-friendly Design** for smaller screens (phones/tablets).  
+
+---
+
+### To Be Added:
+
+1. Ability to upload a **profile picture**.  
+2. Options to change **phone number/email/name**.  
+3. Using a `.env` file to store repetitive configurations (currently blocked by an issue with the **crypto** library).  
+4. More features to come!
+
+---
+
+RO
 
 ---
 
@@ -107,111 +214,3 @@ Acum puteți să vă creați un cont, să adăugați o rețetă sau să explora�
 4. Alte funcționalități interesante vor fi adăugate!  
 
 ---
-
-
-EN
-
----
-
-A basic website for publishing recipes online, made by food enthusiasts for food enthusiasts.
-
-### Running the Project:
-
-Before we begin, you need **Node.js (npm)**, which can be installed by following the steps here: [Node.js installation](https://nodejs.org/en/download/package-manager).  
-Additionally, you'll need **Express.js**, which will be installed later.  
-If you encounter issues with libraries, all the libraries used are listed in the `package.json` files under the **dependencies** section (both for the frontend and backend).
-
----
-
-### I. BACKEND
-
-The backend setup is a bit more complex, requiring multiple steps:  
-
-1. First, you need a local database. For this, we use the **XAMPP** application, which you can download from [here](https://www.apachefriends.org/index.html).  
-2. After installing XAMPP, the servers need to be started. You can do this by going to the **Manage Servers** section and clicking the **Start All** button.  
-3. Then, access [http://localhost/dashboard/](http://localhost/dashboard/), where you’ll see a Welcome screen confirming XAMPP is successfully installed and running. From here, go to the **phpMyAdmin** tab.  
-4. In **phpMyAdmin**, you can view your existing databases. Instead of altering anything, create two new databases named **recipes** and **users**. The button for creating a new database is located in the top-left corner under the phpMyAdmin logo.  
-5. After creating the two new databases, click on **recipes**, then go to the **SQL** tab at the top of the page, and paste the following command exactly as it is:
-
-```sql
-CREATE TABLE `recipes` (
-  `name` text DEFAULT NULL,
-  `author` text DEFAULT NULL,
-  `author_email` text NOT NULL,
-  `description` text DEFAULT NULL,
-  `rating` float DEFAULT NULL,
-  `nr_rating` int(11) DEFAULT NULL,
-  `photo` text DEFAULT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `recipes`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-```
-
-6. The table should now be created successfully. Next, navigate to the **users** database and, again in the **SQL** tab, run the following command:
-
-```sql
-CREATE TABLE `users` (
-  `name` text NOT NULL,
-  `phone` text NOT NULL,
-  `email` text NOT NULL,
-  `password` text NOT NULL,
-  `recipes` int(11) NOT NULL DEFAULT 0,
-  `reset_token` varchar(255) DEFAULT NULL,
-  `token_expiry` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `users`
-  ADD UNIQUE KEY `email` (`email`) USING HASH,
-  ADD UNIQUE KEY `phone` (`phone`) USING HASH;
-```
-
-7. If the commands were entered correctly, you should now have the `recipes` table in the **recipes** database and the `users` table in the **users** database.  
-8. Now, open a terminal, navigate to the **backend** folder, and run `npm install`, followed by `npm start`. If everything worked correctly, you should see a message saying:  
-   **Listening on port 8081...**
-
----
-
-### II. FRONTEND
-
-Running the frontend is simpler. After downloading the project:  
-
-1. Open a terminal, navigate to the **frontend** directory, and run:  
-   ```bash
-   npm install
-   npm start
-   ```  
-
-If all went well, a browser page with the project should open automatically. Now you can create an account, add a recipe, or explore the site. Bon appétit! :D
-
----
-
-### Features:
-
-1. **Account Creation**
-2. **Token-based Login** (stay logged in even if you close the browser or stop the project in the terminal)
-3. **Password Reset via Email** (receive an email with a unique link to reset your password — note: the link works only on the computer running the project)  
-4. **Add Recipes**, including images uploaded by users, a rating system, and the ability to delete your own recipes.  
-5. **Profile Page**, complete with all user information.  
-6. **Feedback Form** (I receive the emails, so please don’t spam! :) )  
-7. **Recipe Page** where all published recipes can be viewed, with search options (by recipe name or author) and filtering/sorting (by rating).  
-8. **Detailed Recipe Information** accessible by clicking on a recipe.  
-9. **Mobile-friendly Design** for smaller screens (phones/tablets).  
-
----
-
-### To Be Added:
-
-1. Ability to upload a **profile picture**.  
-2. Options to change **phone number/email/name**.  
-3. Using a `.env` file to store repetitive configurations (currently blocked by an issue with the **crypto** library).  
-4. More features to come!  
-
----
-
-
-
